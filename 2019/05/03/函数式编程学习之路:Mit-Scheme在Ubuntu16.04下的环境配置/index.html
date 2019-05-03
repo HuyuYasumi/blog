@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="fuyuhuyu 的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        函数式编程学习之路：Mit-Scheme 在 Ubuntu16.04 下的环境配置 - fuyuhuyu 的博客 | fuyuhuyu blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes code, sometimes design </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>fuyuhuyu</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在-MIT-Scheme-解释器内解释或编译运行程序"><span class="toc-text">在 MIT-Scheme 解释器内解释或编译运行程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-MIT-Scheme-直接解释执行程序"><span class="toc-text">使用 MIT-Scheme 直接解释执行程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在-Visual-Studio-Code-上编写和运行Scheme源码"><span class="toc-text">在 Visual Studio Code 上编写和运行Scheme源码</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> sometimes code, sometimes design </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        函数式编程学习之路：Mit-Scheme 在 Ubuntu16.04 下的环境配置
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-03 22:34:55</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#函数式编程" title="函数式编程">函数式编程</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#环境配置" title="环境配置">环境配置</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近，为了学习函数式编程，我开始看 MIT 的视频公开课 - <strong>《计算机程序的构造和解释》</strong>（使用的教程是著名的<strong>SICP</strong>）。为了与课程同步，我需要学习 <strong>scheme</strong> 这门函数式编程语言，这是我学习的第一门以函数式编程为主的语言。首先我要开始学习如何配置这门语言的环境，为了加深记忆以及方便以后的复用而尽量避免再次花时间在搜索引擎上，我把我了解、学习到的内容总结到这篇文章里。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>得益于 Ubuntu 上早有编译好的包，可以直接使用 <code>sudo apt-get install mit-scheme</code> 一步到位。这种方法最简单但安装好的解释器可能不是最新版的，也可能不是想要的版本，对于版本有要求的话，需要访问 MIT-Scheme 的主页下载适用的版本，然后编译安装。</p>
+<h2 id="在-MIT-Scheme-解释器内解释或编译运行程序"><a href="#在-MIT-Scheme-解释器内解释或编译运行程序" class="headerlink" title="在 MIT-Scheme 解释器内解释或编译运行程序"></a>在 MIT-Scheme 解释器内解释或编译运行程序</h2><p>在终端输入 <code>mit-scheme</code> 或 <code>scheme</code> 会进入解释器环境内，这时可以输入 Scheme 语句然后执行，我的解释器环境如下图所示：</p>
+<p><img src="https://miao.su/images/2019/03/16/2019-03-1609-40-14mit-scheme96b32.png" alt></p>
+<p>输入语句然后执行：</p>
+<p><img src="https://miao.su/images/2019/03/16/2019-03-1609-59-48mit-scheme02b10c4.png" alt></p>
+<p>如果有一个文件名为 add.scm 、 内容为 <code>(* 3 4 5)</code> 的Scheme程序，如何执行？</p>
+<ol>
+<li><p>在 mit-scheme 解释器里输入命令 <code>(cf &quot;add&quot;)</code> 可以编译源码:</p>
+<p> <img src="https://miao.su/images/2019/03/16/2019-03-1610-10-54mit-scheme0359bc5.png" alt></p>
+</li>
+<li><p>再输入命令 <code>(load &quot;add&quot;)</code> 会运行编译好的程序:</p>
+<p> <img src="https://miao.su/images/2019/03/16/2019-03-1610-13-00mit-schmem0489817.png" alt></p>
+</li>
+</ol>
+<h2 id="使用-MIT-Scheme-直接解释执行程序"><a href="#使用-MIT-Scheme-直接解释执行程序" class="headerlink" title="使用 MIT-Scheme 直接解释执行程序"></a>使用 MIT-Scheme 直接解释执行程序</h2><p>上述方法有一点麻烦，其实有更简单的方式在终端上执行Scheme程序，我们可以利用 shell 的重定向能力，在终端输入 <code>scheme &lt; add.scm</code>，出现如下提示：</p>
+<p><img src="https://miao.su/images/2019/03/16/2019-03-1610-21-00mit-scheme0552454.png" alt></p>
+<h2 id="在-Visual-Studio-Code-上编写和运行Scheme源码"><a href="#在-Visual-Studio-Code-上编写和运行Scheme源码" class="headerlink" title="在 Visual Studio Code 上编写和运行Scheme源码"></a>在 Visual Studio Code 上编写和运行Scheme源码</h2><ol>
+<li>首先需要安装 <strong>vscode-scheme</strong> 和 <strong>Code Runner</strong> 这两个插件。第一个插件提供了代码高亮和补全等功能，让我们在编写 Scheme 时更舒服，第二个插件让我们能一键运行 Scheme 程序。</li>
+<li><p>配置 Code Runner。在 vscode 的配置里搜索 <code>executorMapByFileExtension</code>，点击 <strong>在settings.json中编辑</strong> 打开 settings.json,如果发现没有名为 <code>code-runner.executorMapByFileExtension</code> 的字段的话，那就添加它，vscode会自动生成默认的配置，然后在该字段下添加一行：<code>&quot;.scm&quot;: &quot;scheme &lt;&quot;</code>，保存后如下所示：</p>
+<p> <img src="https://miao.su/images/2019/03/16/2019-03-1610-46-24mit-scheme069fc73.png" alt></p>
+</li>
+<li>代码写完保存后直接按 Code Runner 的快捷键 Ctrl+Alt+N 即可运行</li>
+</ol>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/xing-xin-er-14">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/HuyuYasumi">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
