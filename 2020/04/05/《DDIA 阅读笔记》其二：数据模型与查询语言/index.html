@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="fuyuhuyu 的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《DDIA 阅读笔记》其二：数据模型与查询语言 - fuyuhuyu 的博客 | fuyuhuyu blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes code,   sometimes design </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>fuyuhuyu</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-数据模型与查询语言"><span class="toc-text">第二章 数据模型与查询语言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-对象关系不匹配"><span class="toc-text">1. 对象关系不匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-数据规范化"><span class="toc-text">2. 数据规范化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-层次模型、网络模型、关系模型、文档模型"><span class="toc-text">3. 层次模型、网络模型、关系模型、文档模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-文档模型中的架构灵活性，模式-VS-无模式"><span class="toc-text">4. 文档模型中的架构灵活性，模式 VS. 无模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-查询的数据局部性"><span class="toc-text">5. 查询的数据局部性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-文档与关系数据库的融合"><span class="toc-text">6.文档与关系数据库的融合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-SQL的优势"><span class="toc-text">7. SQL的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-MapReduce查询"><span class="toc-text">8. MapReduce查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-小结"><span class="toc-text">9. 小结</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> sometimes code,   sometimes design </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《DDIA 阅读笔记》其二：数据模型与查询语言
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-04-05 19:57:21</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#系统设计" title="系统设计">系统设计</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#数据库设计" title="数据库设计">数据库设计</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#DDIA" title="DDIA">DDIA</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#笔记" title="笔记">笔记</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>准备陆续把之前写下的阅读和学习笔记搬到博客上，这是其中之一。*</p>
+<p>欢迎批评*</p>
+<h1 id="第二章-数据模型与查询语言"><a href="#第二章-数据模型与查询语言" class="headerlink" title="第二章 数据模型与查询语言"></a>第二章 数据模型与查询语言</h1><p>多数应用程序是由层层叠加的数据模型构建而成的。每一层通过提供一个明确的数据模型来隐藏更低一层的复杂性。例如为开发数据库使用到的API与为使用数据库使用到的API。</p>
+<h2 id="1-对象关系不匹配"><a href="#1-对象关系不匹配" class="headerlink" title="1. 对象关系不匹配"></a>1. 对象关系不匹配</h2><p>ORM 框架可以减少关系模型与对象模型的转换层的代码量，但不能完全隐藏这两个模型间的的差异。例如，一个人的联系方式可能不止一个，我们可以如何将其存储在关系数据库中？</p>
+<ol>
+<li>联系方式单独作为一个表，并将所属人的标识作为其外键。</li>
+<li>得益于 SQL 模型增加了对结构化数据类型、XML 类型和 JSON 类型的支持，我们可以将多值存储在单行内，同时能查询和索引这些文档数据。</li>
+<li>让应用程序来完成将数据编码为 XML 或 JSON 文档的任务，然后将文档数据存储在所属人的文本列中，当应用程序需要其中的数据时不能依靠数据库的查询或索引功能而是自己解析其结构和内容。</li>
+</ol>
+<p>相比于关系模型，JSON 更具有局部性。例如，当我们查询一个人的信息时，对于关系模型，我们可能需要进行多次查询或连接多个表，而对于 JSON ，所有信息都在同一个地方。</p>
+<h2 id="2-数据规范化"><a href="#2-数据规范化" class="headerlink" title="2. 数据规范化"></a>2. 数据规范化</h2><p><em>使用 ID 的好处是，ID 对人类没有任何意义，因而永远不需要改变：ID 可以保持不变，即使它标识的信息发生变化。任何对人类有意义的东西都可能需要在将来某个时候改变——如果这些信息被复制，所有的冗余副本都需要更新。这会导致写入开销，也存在不一致的风险（有些副本被更新了，还有些副本没有被更新）。去除此类重复是数据库规范化（normalization）的关键思想。</em></p>
+<p>对数据进行规范化需要多对一、多对多的关系，关系模型天生支持该特性，但文档模型天生不支持。多对一、多对多的关系需要连接，但文档模型的树结构没必要支持连接。有的文档型数据库为此提供了连接功能。如果使用没有连接的数据库，就需要在应用程序模拟连接。</p>
+<h2 id="3-层次模型、网络模型、关系模型、文档模型"><a href="#3-层次模型、网络模型、关系模型、文档模型" class="headerlink" title="3. 层次模型、网络模型、关系模型、文档模型"></a>3. 层次模型、网络模型、关系模型、文档模型</h2><p>网络模型是层次模型的推导。层次模型的节点只能有一个父节点，网络模型的节点能有多个父节点。这导致了程序员使用网络模型数据库时需要手动选择“访问路径”。</p>
+<p>关系模型使用查询优化器自动生成“访问路径”。</p>
+<p>文档模型被还原为层次模型。在表示多对一、多对多关系时，文档数据库系统中相关项目都被唯一标识符引用，这个标识符在关系模型中被称作外键，在文档模型中被成为文档引用。该标识符在读取时通过通过连接和后续查询来解析。</p>
+<h2 id="4-文档模型中的架构灵活性，模式-VS-无模式"><a href="#4-文档模型中的架构灵活性，模式-VS-无模式" class="headerlink" title="4. 文档模型中的架构灵活性，模式 VS. 无模式"></a>4. 文档模型中的架构灵活性，模式 VS. 无模式</h2><p>文档模型有时被称为“无模式（schemaless）”，但这具有误导性。因为在读取数据时我们会假定某种结构–即隐式模式，但该结构不由文档型数据库强制保证。一个更精确的术语是”读时模式（schema-on-read）”–数据结构只有在读时才被解释，相对应的是“写时模式（schema-on-write）”–传统关系模型要求模式明确且 DBMS 要确保所有数据都符合模式。</p>
+<ul>
+<li>读时模式：没有模式，DBMS 不要求写入的数据与现有数据的结构一致，但数据被读取时应用程序需解释其结构。文档模型便是这一类型，这为文档型数据库带来了灵活性。</li>
+<li>写时模式：模式明确，这意味在写入时要验证数据是否符合模式。</li>
+</ul>
+<p>例如，当一个实体将一个旧属性拆分为两个属性时，对于文档型数据库，旧的数据不需变动，在应用程序增加对旧数据手动拆分的代码就可以。而对于关系型数据库，需要更改表的模式–这时数据库系统要停机。</p>
+<h2 id="5-查询的数据局部性"><a href="#5-查询的数据局部性" class="headerlink" title="5. 查询的数据局部性"></a>5. 查询的数据局部性</h2><p>文档通常以单个连续字符串的形式存储，编码为 JSON、XML 或其二进制变体（例如 MongoDB 的 BSON）。</p>
+<p>存储局部性可以避免在插叙时因将数据分割在多个位置而需要的多次索引所花费的磁盘查找时间。</p>
+<p>局部性并不只有文档模型在考虑，一些关系型数据库也提供了相关支持。</p>
+<h2 id="6-文档与关系数据库的融合"><a href="#6-文档与关系数据库的融合" class="headerlink" title="6.文档与关系数据库的融合"></a>6.文档与关系数据库的融合</h2><p>现在，PostgreSQL 和 MySQL 等数据库提供了对 JSON 的支持。关系模型和文档模型的混合是数据库发展的一条很好的路线。</p>
+<h2 id="7-SQL的优势"><a href="#7-SQL的优势" class="headerlink" title="7. SQL的优势"></a>7. SQL的优势</h2><p>SQL 相当有限的功能性为数据库提供了更多自动优化的空间。</p>
+<p>命令代码很难在多个内核和多个机器之间并行化，因为它指定了指令必须以特定顺序执行。声明式语言更具有并行执行的潜力，因为它们仅指定结果的模式，而不指定用于确定结果的算法。在适当情况下，数据库可以自由使用查询语言的并行实现。</p>
+<h2 id="8-MapReduce查询"><a href="#8-MapReduce查询" class="headerlink" title="8. MapReduce查询"></a>8. MapReduce查询</h2><p>MapReduce 是一个由Google推广的编程模型，用于在多台机器上批量处理大规模的数据。</p>
+<p>MapReduce 既不是一个声明式的查询语言，也不是一个完全命令式的查询 API，而是处于两者之间：查询的逻辑用代码片断来表示，这些代码片段会被处理框架重复性调用。它基于 map （也称为 collect ）和 reduce （也称为 fold 或 inject ）函数，两个函数存在于许多函数式编程语言中。</p>
+<p>能够在查询中使用 JavaScript 代码是高级查询的一个重要特性，但这不限于 MapReduce，一些 SQL 数据库也可以用 JavaScript 函数进行扩展。</p>
+<h2 id="9-小结"><a href="#9-小结" class="headerlink" title="9. 小结"></a>9. 小结</h2><p>新的非关系型 “NoSQL” 数据存储在两个主要方向上存在分歧：</p>
+<ol>
+<li>文档数据库的应用场景是：数据通常是自我包含的，而且文档之间的关系非常稀少。</li>
+<li>图形数据库用于相反的场景：任意事物都可能与任何事物相关联。</li>
+</ol>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/xing-xin-er-14">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/HuyuYasumi">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

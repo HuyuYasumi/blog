@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="fuyuhuyu 的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《DDIA 阅读笔记》其一：数据库密集系统设计指标 - fuyuhuyu 的博客 | fuyuhuyu blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes code,   sometimes design </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>fuyuhuyu</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章：可靠性、可维护性、可扩展性"><span class="toc-text">第一章：可靠性、可维护性、可扩展性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-数据密集型应用的标准组件"><span class="toc-text">1.数据密集型应用的标准组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-可靠性"><span class="toc-text">2. 可靠性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件故障"><span class="toc-text">- 硬件故障</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软件错误"><span class="toc-text">- 软件错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#人为错误"><span class="toc-text">- 人为错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-可扩展性"><span class="toc-text">3. 可扩展性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述负载的参数"><span class="toc-text">- 描述负载的参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#描述性能的指标"><span class="toc-text">- 描述性能的指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应对负载的方法"><span class="toc-text">- 应对负载的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-可维护性"><span class="toc-text">4. 可维护性</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> sometimes code,   sometimes design </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《DDIA 阅读笔记》其一：数据库密集系统设计指标
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-04-05 19:50:41</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#系统设计" title="系统设计">系统设计</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#DDIA" title="DDIA">DDIA</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#笔记" title="笔记">笔记</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p><em>准备陆续把之前写下的阅读和学习笔记搬到博客上，这是其中之一。</em></p>
+<p><em>欢迎批评。</em></p>
+<h1 id="第一章：可靠性、可维护性、可扩展性"><a href="#第一章：可靠性、可维护性、可扩展性" class="headerlink" title="第一章：可靠性、可维护性、可扩展性"></a>第一章：可靠性、可维护性、可扩展性</h1><h2 id="1-数据密集型应用的标准组件"><a href="#1-数据密集型应用的标准组件" class="headerlink" title="1.数据密集型应用的标准组件"></a>1.数据密集型应用的标准组件</h2><ul>
+<li>数据库（database）：存储数据</li>
+<li>缓存（cache）：记住开销昂贵的操作，以加快读取速度</li>
+<li>搜索索引（search indexes）：允许用户按关键字搜索数据，或过滤数据</li>
+<li>流处理（stream processing）：向其他进程发送消息，进行异步处理</li>
+<li>批处理（batch processing）：定期处理积累的大批量数据</li>
+</ul>
+<h2 id="2-可靠性"><a href="#2-可靠性" class="headerlink" title="2. 可靠性"></a>2. 可靠性</h2><h3 id="硬件故障"><a href="#硬件故障" class="headerlink" title="- 硬件故障"></a>- 硬件故障</h3><p>硬件故障让人想到硬盘崩溃、内存出错、机房断电。</p>
+<p>硬件冗余是一种增加容错率解决方案，例如由硬盘组成的 RAID、双路电源、热插拔 CPU 等。</p>
+<h3 id="软件错误"><a href="#软件错误" class="headerlink" title="- 软件错误"></a>- 软件错误</h3><p>比起硬件故障，系统性错误往往是牵一发而动全身，例如级联错误。</p>
+<h3 id="人为错误"><a href="#人为错误" class="headerlink" title="- 人为错误"></a>- 人为错误</h3><h2 id="3-可扩展性"><a href="#3-可扩展性" class="headerlink" title="3. 可扩展性"></a>3. 可扩展性</h2><h3 id="描述负载的参数"><a href="#描述负载的参数" class="headerlink" title="- 描述负载的参数"></a>- 描述负载的参数</h3><p>扇出描述用来在事务处理系统中为了服务一个传入请求而需要执行其他服务的请求数量。</p>
+<p>在推特的例子中，每个用户粉丝数的分布（可能按这些用户的发推频率来加权）是探讨可扩展性的一个关键负载参数，因为它决定了扇出负载。</p>
+<p>推特逐步转向了两种方法的混合。大多数用户发的推文会被扇出写入其粉丝主页时间线缓存中。但是少数拥有海量粉丝的用户（即名流）会被排除在外。当用户读取主页时间线时，分别地获取出该用户所关注的每位名流的推文，再与用户的主页时间线缓存合并。<br>当负载被描述好，就可以研究当负载增加时会发生什么。</p>
+<h3 id="描述性能的指标"><a href="#描述性能的指标" class="headerlink" title="- 描述性能的指标"></a>- 描述性能的指标</h3><p>性能指标:</p>
+<ul>
+<li>吞吐量</li>
+<li>平均响应时间</li>
+<li>百分点位</li>
+</ul>
+<p>平均响应时间在很多场景是没有意义的。</p>
+<p>百分位点通常用于服务级别目标（SLO, service level objectives）和服务级别协议（SLA,service level agreements），即定义服务预期性能和可用性的合同。 SLA 可能会声明，如果服务响应时间的中位数小于200毫秒，且99.9百分位点低于1秒，则认为服务工作正常（如果响应时间更长，就认为服务不达标）。这些指标为客户设定了期望值，并允许客户在 SLA 未达标的情况下要求退款。</p>
+<h3 id="应对负载的方法"><a href="#应对负载的方法" class="headerlink" title="- 应对负载的方法"></a>- 应对负载的方法</h3><p>纵向扩展（垂直扩展）<br>横向扩展（水平扩展）</p>
+<p>弹性系统 VS. 手动扩展</p>
+<ul>
+<li>当负载极难预测时，弹性系统比手工扩展更有用。</li>
+<li>手工扩展系统更简单，并且意外操作更少。</li>
+</ul>
+<p>一个良好适配应用的可扩展架构，是围绕着假设（assumption）建立的：哪些操作是常见的？哪些操作是罕见的？这就是所谓负载参数。</p>
+<h2 id="4-可维护性"><a href="#4-可维护性" class="headerlink" title="4. 可维护性"></a>4. 可维护性</h2><p>软件系统设计原则</p>
+<ul>
+<li>可操作性</li>
+<li>简单性: 管理复杂度</li>
+<li>可演化性</li>
+</ul>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/xing-xin-er-14">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/HuyuYasumi">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
